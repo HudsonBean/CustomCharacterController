@@ -15,9 +15,11 @@ local CHARACTER_COMPONENTS : ModuleScript = game.ServerStorage.CharacterComponen
 local CHAR_HANDLER = {}
 
 function CHAR_HANDLER.new(player: Player) -- Creates a new player object
-	local NEW_PILL : Instance = CHARACTER_COMPONENTS.Pill:clone()
-	NEW_PILL.Name = ""
-	return NEW_PILL
+	local CHARACTER : Instance = CHARACTER_COMPONENTS.Pill:clone()
+	CHARACTER.Name = player.Name .. " Pill"
+	CHARACTER.Parent = workspace.Characters
+	CHARACTER.PrimaryPart:SetNetworkOwner(player)
+	return CHARACTER
 end
 
 function CHAR_HANDLER:Destroy(a : group)
