@@ -15,10 +15,10 @@ local CHARACTER_COMPONENTS : ModuleScript = game.ServerStorage.CharacterComponen
 local CHAR_HANDLER = {}
 
 function CHAR_HANDLER.new(player: Player) -- Creates a new player object
-	local CHARACTER : Instance = CHARACTER_COMPONENTS.Pill:clone()
-	CHARACTER.Name = player.Name .. " Pill"
-	CHARACTER.Parent = workspace.Characters
-	CHARACTER.PrimaryPart:SetNetworkOwner(player)
+	local CHARACTER : Instance = CHARACTER_COMPONENTS.Pill:clone() -- Clone the character in server storage
+	CHARACTER.Name = player.Name .. " Pill" -- Name it with the playerd nsmr
+	CHARACTER.Parent = workspace.Characters -- Place it into the world
+	CHARACTER.PrimaryPart:SetNetworkOwner(player) -- Give network ownership
 	return CHARACTER
 end
 
