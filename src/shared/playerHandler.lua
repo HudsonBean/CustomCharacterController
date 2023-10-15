@@ -1,5 +1,5 @@
 --//Modules
-local characterController = require(game.ReplicatedStorage.Shared.characterController)
+local CHARACTER_CONTROLLER : ModuleScript = require(game.ReplicatedStorage.Shared.characterHandler)
 
 --//Services
 
@@ -11,23 +11,23 @@ local characterController = require(game.ReplicatedStorage.Shared.characterContr
 --//Connections
 
 --//Main
-local playerHandler = {}
-playerHandler.__index = playerHandler
+local PLAYER_HANDLER : table = {}
+PLAYER_HANDLER.__index = PLAYER_HANDLER
 
-function playerHandler.new(player: Player) -- Creates a new player object
-	local playerObject = { }
-	setmetatable(playerObject, playerHandler)
+function PLAYER_HANDLER.new(player : Player) -- Creates a new player object
+	local playerObject : table = { }
+	setmetatable(playerObject, PLAYER_HANDLER)
 	
 	-- Data
 	playerObject.owner = player
-	playerObject.pawn = characterController.new(player) -- Create the custom character controller
+	playerObject.character = CHARACTER_CONTROLLER.new(player) -- Create the custom character controller
 
 	return playerObject
 end
 
-function playerHandler:Destroy() -- Clean up method for destroying the pawn and breaking down the player Object
+function PLAYER_HANDLER:Destroy(player : Player) -- Clean up method for destroying the pawn and breaking down the player Object
 	-- Do clean up
 	print("CLEANING UP FROM DESTROY CALL IN PLAYERHANDLER")
 end
 
-return playerHandler
+return PLAYER_HANDLER
